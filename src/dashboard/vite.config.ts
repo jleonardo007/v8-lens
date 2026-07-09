@@ -1,3 +1,5 @@
+import { resolve } from 'node:path';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
@@ -6,6 +8,13 @@ import { resolve } from 'path';
 export default defineConfig({
   plugins: [react()],
   root: resolve(__dirname),
+  resolve: {
+    alias: {
+      '@core': resolve(__dirname, '../../core'),
+      '@cli': resolve(__dirname, '../../cli'),
+      '@dashboard': resolve(__dirname, '.'),
+    },
+  },
   build: {
     outDir: resolve(__dirname, '../../dist/dashboard'),
     emptyOutDir: true,
