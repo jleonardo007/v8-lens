@@ -40,6 +40,23 @@
   ],
   "author": "Leonardo Bravo (https://github.com/jleonardo007)",
   "license": "MIT",
+  "imports": {
+    "#core/*": "./src/core/*.ts",
+    "#cli/*": "./src/cli/*.ts"
+  },
+  "scripts": {
+    "start": "tsx src/cli/index.ts",
+    "build:cli": "tsc",
+    "build:dashboard": "vite build --config src/dashboard/vite.config.ts",
+    "build": "pnpm build:cli && pnpm build:dashboard",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:check": "eslint . --max-warnings 0",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate": "npm run lint:check && npm run format:check",
+    "prepare": "husky"
+  },
   "dependencies": {
     "inquirer": "^14.0.2",
     "react": "^19.2.7",
