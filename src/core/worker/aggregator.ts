@@ -16,9 +16,7 @@ export function createAggregator(): Aggregator {
     const used = history.map((s) => s.usedMB);
     const avgUsed = used.reduce((a, b) => a + b, 0) / used.length;
     const peakUsed = Math.max(...used);
-    if (!peakUsed) {
-      console.warn(...used);
-    }
+
     return {
       latestUsedMB: latest.usedMB,
       latestTotalMB: latest.totalMB,
