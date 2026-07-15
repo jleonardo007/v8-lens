@@ -21,7 +21,6 @@ export interface CDPConnection {
 }
 
 export function connectCDP(url: string): Promise<CDPConnection> {
-  console.log('URL:', JSON.stringify(url));
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(url);
     const pendingCommands = new Map<number, PendingCommand>();
