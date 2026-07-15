@@ -1,4 +1,4 @@
-import type { GCEvent } from '../../../core/shared/types';
+import type { GCEvent } from '@core/shared/types';
 
 interface Props {
   items: GCEvent[];

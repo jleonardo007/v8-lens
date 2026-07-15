@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { AggregatedEventLoop } from '../../../core/shared/types';
+import type { AggregatedEventLoop } from '@core/shared/types';
 
 interface Props {
   data: AggregatedEventLoop | null;

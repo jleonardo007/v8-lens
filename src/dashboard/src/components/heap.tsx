@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { AggregatedHeap } from '../../../core/shared/types';
+import type { AggregatedHeap } from '@core/shared/types';
 
 interface Props {
   data: AggregatedHeap | null;

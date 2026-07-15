@@ -1,4 +1,4 @@
-import type { Anomaly } from '../../../core/shared/types';
+import type { Anomaly } from '@core/shared/types';
 
 interface Props {
   items: Anomaly[];

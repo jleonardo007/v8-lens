@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { CPUProfile, FlameNode } from '../../../core/shared/types';
+import type { CPUProfile, FlameNode } from '@core/shared/types';
 
 interface Props {
   profile: CPUProfile | null;

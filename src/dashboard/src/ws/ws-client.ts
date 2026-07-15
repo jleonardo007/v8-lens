@@ -1,4 +1,4 @@
-import type { WsMessage } from '../../../core/shared/types';
+import type { WsMessage } from '@core/shared/types';
 
 export type MessageHandler<T = unknown> = (payload: T, timestamp: number) => void;
 

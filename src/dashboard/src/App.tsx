@@ -11,7 +11,7 @@ import type {
   GCEvent,
   Anomaly,
   CPUProfile,
-} from '../../core/shared/types';
+} from '@core/shared/types';
 
 const WS_URL = 'ws://localhost:3001';
 const MAX_GC_EVENTS = 50;

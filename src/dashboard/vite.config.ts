@@ -11,7 +11,6 @@ export default defineConfig({
     alias: {
       '@core': resolve(__dirname, '../../core'),
       '@cli': resolve(__dirname, '../../cli'),
-      '@dashboard': resolve(__dirname, '.'),
     },
   },
   build: {
