@@ -141,11 +141,11 @@ export function CPU({ profile }: Props) {
         tooltip.style.left = `${Math.min(mx + 12, W - 200)}px`;
         tooltip.style.top = `${my - 10}px`;
         tooltip.innerHTML = `
-          <div class="font-mono text-xs text-[#F0F0F6] mb-1">${hit.node.name || '(anonymous)'}</div>
-          <div class="font-mono text-[10px] text-[#8B8FA8]">total ${hit.node.totalPct.toFixed(1)}% · self ${hit.node.selfPct.toFixed(1)}%</div>
-          <div class="font-mono text-[10px] text-[#8B8FA8]">${hit.node.totalMs.toFixed(1)}ms total · ${hit.node.selfMs.toFixed(1)}ms self</div>
-          ${hit.node.url ? `<div class="font-mono text-[10px] text-[#7C6AF5] mt-1">${hit.node.url}:${hit.node.line}</div>` : ''}
-          ${hit.node.deoptReasons.length ? `<div class="font-mono text-[10px] text-[#E8A020] mt-1">⚠ ${hit.node.deoptReasons[0]}</div>` : ''}
+          <div class="font-mono text-xs text-primary mb-1">${hit.node.name || '(anonymous)'}</div>
+          <div class="font-mono text-[10px] text-secondary">total ${hit.node.totalPct.toFixed(1)}% · self ${hit.node.selfPct.toFixed(1)}%</div>
+          <div class="font-mono text-[10px] text-secondary">${hit.node.totalMs.toFixed(1)}ms total · ${hit.node.selfMs.toFixed(1)}ms self</div>
+          ${hit.node.url ? `<div class="font-mono text-[10px] text-accent mt-1">${hit.node.url}:${hit.node.line}</div>` : ''}
+          ${hit.node.deoptReasons.length ? `<div class="font-mono text-[10px] text-warning mt-1">⚠ ${hit.node.deoptReasons[0]}</div>` : ''}
         `;
       } else {
         tooltip.style.opacity = '0';
@@ -167,15 +167,15 @@ export function CPU({ profile }: Props) {
 
   if (!profile) {
     return (
-      <div className="bg-[#12121A] border border-[#1E1E2E] rounded-lg">
-        <div className="px-4 py-3 border-b border-[#1E1E2E]">
-          <span className="font-mono text-xs text-[#8B8FA8] uppercase tracking-widest">CPU</span>
+      <div className="bg-surface border border-border rounded-lg">
+        <div className="px-4 py-3 border-b border-border">
+          <span className="font-mono text-xs text-secondary uppercase tracking-widest">CPU</span>
         </div>
         <div className="px-4 py-8 text-center">
-          <p className="font-mono text-xs text-[#8B8FA8]">No profile captured yet</p>
-          <p className="font-mono text-[10px] text-[#4A4A5A] mt-2">
-            press <kbd className="text-[#7C6AF5]">p</kbd> to start ·{' '}
-            <kbd className="text-[#7C6AF5]">s</kbd> to stop
+          <p className="font-mono text-xs text-secondary">No profile captured yet</p>
+          <p className="font-mono text-[10px] text-muted mt-2">
+            In your terminal press <kbd className="text-accent">p</kbd> to start ·{' '}
+            <kbd className="text-accent">s</kbd> to stop
           </p>
         </div>
       </div>
@@ -183,16 +183,16 @@ export function CPU({ profile }: Props) {
   }
 
   return (
-    <div className="bg-[#12121A] border border-[#1E1E2E] rounded-lg overflow-hidden">
+    <div className="bg-surface border border-border rounded-lg overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1E1E2E]">
-        <span className="font-mono text-xs text-[#8B8FA8] uppercase tracking-widest">CPU</span>
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+        <span className="font-mono text-xs text-secondary uppercase tracking-widest">CPU</span>
         <div className="flex items-center gap-4">
-          <span className="font-mono text-xs text-[#8B8FA8]">
+          <span className="font-mono text-xs text-secondary">
             {profile.durationMs.toFixed(0)}ms
           </span>
           {profile.deoptWarnings.length > 0 && (
-            <span className="font-mono text-xs text-[#E8A020]">
+            <span className="font-mono text-xs text-warning">
               ⚠ {profile.deoptWarnings.length} deopt{profile.deoptWarnings.length > 1 ? 's' : ''}
             </span>
           )}
@@ -204,21 +204,21 @@ export function CPU({ profile }: Props) {
         <canvas ref={canvasRef} className="w-full block" />
         <div
           ref={tooltipRef}
-          className="absolute pointer-events-none bg-[#0A0A0F] border border-[#1E1E2E] rounded px-3 py-2 opacity-0 transition-opacity duration-100 z-10"
+          className="absolute pointer-events-none bg-surface border border-border rounded px-3 py-2 opacity-0 transition-opacity duration-100 z-10"
           style={{ minWidth: 160 }}
         />
       </div>
 
       {/* Top functions */}
-      <div className="border-t border-[#1E1E2E]">
+      <div className="border-t border-border">
         {profile.topFunctions.slice(0, 5).map((fn, i) => (
           <div
             key={i}
-            className="flex items-center gap-3 px-4 py-2 border-b border-[#1E1E2E] last:border-0"
+            className="flex items-center gap-3 px-4 py-2 border-b border-border last:border-0"
           >
-            <span className="font-mono text-[10px] text-[#4A4A5A] w-4">{i + 1}</span>
-            <span className="font-mono text-xs text-[#F0F0F6] flex-1 truncate">{fn.name}</span>
-            <div className="w-24 h-1 bg-[#1E1E2E] rounded-full overflow-hidden">
+            <span className="font-mono text-[10px] text-muted w-4">{i + 1}</span>
+            <span className="font-mono text-xs text-primary flex-1 truncate">{fn.name}</span>
+            <div className="w-24 h-1 bg-border rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full"
                 style={{
@@ -227,10 +227,10 @@ export function CPU({ profile }: Props) {
                 }}
               />
             </div>
-            <span className="font-mono text-xs text-[#8B8FA8] w-12 text-right">
+            <span className="font-mono text-xs text-secondary w-12 text-right">
               {fn.selfPct.toFixed(1)}%
             </span>
-            <span className="font-mono text-xs text-[#8B8FA8] w-16 text-right">
+            <span className="font-mono text-xs text-secondary w-16 text-right">
               {fn.selfMs.toFixed(1)}ms
             </span>
           </div>

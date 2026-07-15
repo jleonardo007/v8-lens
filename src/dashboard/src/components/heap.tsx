@@ -143,15 +143,15 @@ export function Heap({ data }: Props) {
   const avgMB = data?.avgUsedMB.toFixed(1) ?? '—';
 
   return (
-    <div className="bg-[#12121A] border border-[#1E1E2E] rounded-lg overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1E1E2E]">
-        <span className="font-mono text-xs text-[#8B8FA8] uppercase tracking-widest">Heap</span>
+    <div className="bg-surface border border-border rounded-lg overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+        <span className="font-mono text-xs text-secondary uppercase tracking-widest">Heap</span>
         <div className="flex items-center gap-4">
-          <Stat label="used" value={`${usedMB}MB`} color="#7C6AF5" />
-          <Stat label="total" value={`${totalMB}MB`} color="#8B8FA8" />
-          <Stat label="external" value={`${extMB}MB`} color="#2ECC8F" />
-          <Stat label="peak" value={`${peakMB}MB`} color="#E8A020" />
-          <Stat label="avg" value={`${avgMB}MB`} color="#8B8FA8" />
+          <Stat label="used" value={`${usedMB}MB`} color="text-accent" />
+          <Stat label="total" value={`${totalMB}MB`} color="text-secondary" />
+          <Stat label="external" value={`${extMB}MB`} color="text-success" />
+          <Stat label="peak" value={`${peakMB}MB`} color="text-warning" />
+          <Stat label="avg" value={`${avgMB}MB`} color="text-secondary" />
         </div>
       </div>
       <canvas ref={canvasRef} height={CANVAS_HEIGHT} className="w-full block" />
@@ -162,10 +162,8 @@ export function Heap({ data }: Props) {
 function Stat({ label, value, color }: { label: string; value: string; color: string }) {
   return (
     <div className="text-right">
-      <div className="font-mono text-xs" style={{ color }}>
-        {value}
-      </div>
-      <div className="font-mono text-[10px] text-[#8B8FA8]">{label}</div>
+      <div className={`font-mono text-xs ${color}`}>{value}</div>
+      <div className="font-mono text-[10px] text-muted">{label}</div>
     </div>
   );
 }

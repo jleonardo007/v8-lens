@@ -9,19 +9,6 @@ function formatTime(ts: number): string {
   return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}:${String(d.getSeconds()).padStart(2, '0')}`;
 }
 
-const SEVERITY_STYLES = {
-  warn: {
-    dot: '#E8A020',
-    bg: 'rgba(232,160,32,0.06)',
-    border: 'rgba(232,160,32,0.2)',
-  },
-  critical: {
-    dot: '#E24B4A',
-    bg: 'rgba(226,75,74,0.06)',
-    border: 'rgba(226,75,74,0.2)',
-  },
-};
-
 const TYPE_LABELS: Record<string, string> = {
   'heap-leak': 'Heap Leak',
   'gc-pressure': 'GC Pressure',
@@ -30,19 +17,19 @@ const TYPE_LABELS: Record<string, string> = {
 };
 
 export function Anomalies({ items }: Props) {
+  const hasCritical = items.some((a) => a.severity === 'critical');
+
   return (
-    <div className="bg-[#12121A] border border-[#1E1E2E] rounded-lg overflow-hidden">
-      <div className="px-4 py-3 border-b border-[#1E1E2E] flex items-center justify-between">
-        <span className="font-mono text-xs text-[#8B8FA8] uppercase tracking-widest">
+    <div className="bg-surface border border-border rounded-lg overflow-hidden">
+      <div className="px-4 py-3 border-b border-border flex items-center justify-between">
+        <span className="font-mono text-xs text-secondary uppercase tracking-widest">
           Anomalies
         </span>
         {items.length > 0 && (
           <span
-            className="font-mono text-[10px] px-1.5 py-0.5 rounded"
-            style={{
-              color: '#E24B4A',
-              background: 'rgba(226,75,74,0.1)',
-            }}
+            className={`font-mono text-[10px] px-1.5 py-0.5 rounded ${
+              hasCritical ? 'text-danger bg-danger/10' : 'text-warning bg-warning/10'
+            }`}
           >
             {items.length}
           </span>
@@ -51,37 +38,36 @@ export function Anomalies({ items }: Props) {
 
       {!items.length ? (
         <div className="px-4 py-6 text-center">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#2ECC8F] mx-auto mb-2" />
-          <p className="font-mono text-xs text-[#8B8FA8]">No anomalies detected</p>
+          <div className="w-1.5 h-1.5 rounded-full bg-success mx-auto mb-2" />
+          <p className="font-mono text-xs text-muted">No anomalies detected</p>
         </div>
       ) : (
-        <div className="overflow-y-auto flex flex-col gap-2 px-2 max-h-[50vh] border-red-400">
+        <div className="max-h-72 overflow-y-auto flex flex-col gap-2 p-3">
           {items.map((anomaly, i) => {
-            const style = SEVERITY_STYLES[anomaly.severity];
+            const isCrit = anomaly.severity === 'critical';
             return (
               <div
                 key={i}
-                className="rounded px-3 py-2"
-                style={{
-                  background: style.bg,
-                  border: `0.5px solid ${style.border}`,
-                }}
+                className={`rounded px-3 py-2 border ${
+                  isCrit ? 'bg-danger/5 border-danger/20' : 'bg-warning/5 border-warning/20'
+                }`}
               >
                 <div className="flex items-center gap-2 mb-1">
                   <div
-                    className="w-1.5 h-1.5 rounded-full shrink-0"
-                    style={{ background: style.dot }}
+                    className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+                      isCrit ? 'bg-danger' : 'bg-warning'
+                    }`}
                   />
-                  <span className="font-mono text-[10px]" style={{ color: style.dot }}>
+                  <span
+                    className={`font-mono text-[10px] ${isCrit ? 'text-danger' : 'text-warning'}`}
+                  >
                     {TYPE_LABELS[anomaly.type] ?? anomaly.type}
                   </span>
-                  <span className="font-mono text-[10px] text-[#8B8FA8] ml-auto">
+                  <span className="font-mono text-[10px] text-muted ml-auto">
                     {formatTime(anomaly.timestamp)}
                   </span>
                 </div>
-                <p className="font-mono text-xs text-[#F0F0F6] leading-relaxed">
-                  {anomaly.message}
-                </p>
+                <p className="font-mono text-xs text-primary leading-relaxed">{anomaly.message}</p>
               </div>
             );
           })}

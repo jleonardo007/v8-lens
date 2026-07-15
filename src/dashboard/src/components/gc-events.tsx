@@ -13,24 +13,23 @@ function formatTime(ts: number): string {
 
 export function GCEvents({ items }: Props) {
   return (
-    <div className="bg-[#12121A] border border-[#1E1E2E] rounded-lg overflow-hidden">
-      <div className="px-4 py-3 border-b border-[#1E1E2E] flex items-center justify-between">
-        <span className="font-mono text-xs text-[#8B8FA8] uppercase tracking-widest">GC</span>
-        <span className="font-mono text-[10px] text-[#8B8FA8]">{items.length} events</span>
+    <div className="bg-surface border border-border rounded-lg overflow-hidden">
+      <div className="px-4 py-3 border-b border-border flex items-center justify-between">
+        <span className="font-mono text-xs text-secondary uppercase tracking-widest">GC</span>
+        <span className="font-mono text-[10px] text-muted">{items.length} events</span>
       </div>
 
       {!items.length ? (
         <div className="px-4 py-6 text-center">
-          <p className="font-mono text-xs text-[#8B8FA8]">No GC events yet</p>
+          <p className="font-mono text-xs text-muted">No GC events yet</p>
         </div>
       ) : (
-        <div className="overflow-y-auto flex flex-col gap-2 p-3 max-h-[50vh]">
+        <div className="max-h-64 overflow-y-auto">
           {items.map((event, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 px-4 py-2 border-b border-[#1E1E2E] last:border-0"
+              className="flex items-center gap-3 px-4 py-2 border-b border-border last:border-0"
             >
-              {/* Type badge */}
               <span
                 className="font-mono text-[10px] px-1.5 py-0.5 rounded"
                 style={{
@@ -41,21 +40,15 @@ export function GCEvents({ items }: Props) {
               >
                 {event.type}
               </span>
-
-              {/* Freed */}
-              <span className="font-mono text-xs text-[#F0F0F6] flex-1">
+              <span className="font-mono text-xs text-primary flex-1">
                 −{toMB(event.freedBytes)}MB
               </span>
-
-              {/* Duration */}
               {event.durationMs > 0 && (
-                <span className="font-mono text-xs text-[#8B8FA8]">
+                <span className="font-mono text-xs text-secondary">
                   {event.durationMs.toFixed(0)}ms
                 </span>
               )}
-
-              {/* Time */}
-              <span className="font-mono text-[10px] text-[#8B8FA8]">
+              <span className="font-mono text-[10px] text-muted">
                 {formatTime(event.timestamp)}
               </span>
             </div>

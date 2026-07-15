@@ -23,6 +23,12 @@ function lagColor(lagMs: number): string {
   return COLORS.ok;
 }
 
+function lagClass(lagMs: number): string {
+  if (lagMs > CRIT_MS) return 'text-danger';
+  if (lagMs > WARN_MS) return 'text-warning';
+  return 'text-success';
+}
+
 export function EventLoop({ data }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const historyRef = useRef<AggregatedEventLoop[]>([]);
@@ -109,18 +115,17 @@ export function EventLoop({ data }: Props) {
   const lagMs = data?.latestLagMs.toFixed(1) ?? '—';
   const avgMs = data?.avgLagMs.toFixed(1) ?? '—';
   const peakMs = data?.peakLagMs.toFixed(1) ?? '—';
-  const color = data ? lagColor(data.latestLagMs) : '#8B8FA8';
 
   return (
-    <div className="bg-[#12121A] border border-[#1E1E2E] rounded-lg overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#1E1E2E]">
-        <span className="font-mono text-xs text-[#8B8FA8] uppercase tracking-widest">
+    <div className="bg-surface border border-border rounded-lg overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+        <span className="font-mono text-xs text-secondary uppercase tracking-widest">
           Event Loop
         </span>
         <div className="flex items-center gap-4">
-          <Stat label="lag" value={`${lagMs}ms`} color={color} />
-          <Stat label="avg" value={`${avgMs}ms`} color="#8B8FA8" />
-          <Stat label="peak" value={`${peakMs}ms`} color="#E8A020" />
+          <Stat label="lag" value={`${lagMs}ms`} color={lagClass(parseInt(lagMs))} />
+          <Stat label="avg" value={`${avgMs}ms`} color="text-secondary" />
+          <Stat label="peak" value={`${peakMs}ms`} color="text-warning" />
         </div>
       </div>
       <canvas ref={canvasRef} height={CANVAS_HEIGHT} className="w-full block" />
@@ -131,10 +136,8 @@ export function EventLoop({ data }: Props) {
 function Stat({ label, value, color }: { label: string; value: string; color: string }) {
   return (
     <div className="text-right">
-      <div className="font-mono text-xs" style={{ color }}>
-        {value}
-      </div>
-      <div className="font-mono text-[10px] text-[#8B8FA8]">{label}</div>
+      <div className={`font-mono text-xs ${color}`}>{value}</div>
+      <div className="font-mono text-[10px] text-muted">{label}</div>
     </div>
   );
 }

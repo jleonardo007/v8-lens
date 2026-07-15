@@ -57,26 +57,26 @@ export default function App() {
 
   if (!connected) {
     return (
-      <div className="min-h-screen bg-[#0A0A0F] flex items-center justify-center">
+      <div className="min-h-screen bg-base flex items-center justify-center">
         <div className="text-center">
-          <div className="w-2 h-2 rounded-full bg-[#7C6AF5] mx-auto mb-4 animate-pulse" />
-          <p className="text-[#8B8FA8] font-mono text-sm">Connecting to process...</p>
+          <div className="w-2 h-2 rounded-full bg-accent mx-auto mb-4 animate-pulse" />
+          <p className="text-secondary font-mono text-sm">Connecting to process...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-[#F0F0F6] font-['Inter'] p-4 flex flex-col gap-4">
+    <div className="min-h-screen bg-base text-primary font-sans p-4 flex flex-col gap-4">
       {/* Header */}
       <header className="flex items-center gap-3">
-        <div className="w-2 h-2 rounded-full bg-[#2ECC8F] animate-pulse" />
-        <span className="font-mono text-xs text-[#8B8FA8] tracking-widest uppercase">v8-lens</span>
-        <span className="text-[#1E1E2E] text-xs">—</span>
-        <span className="font-mono text-xs text-[#8B8FA8]">observing</span>
+        <div className="w-2 h-2 rounded-full bg-success animate-pulse" />
+        <span className="font-mono text-xs text-secondary tracking-widest uppercase">v8-lens</span>
+        <span className="text-bg-border text-xs">—</span>
+        <span className="font-mono text-xs text-secondary">observing</span>
       </header>
 
-      {/* Top row — Heap + Event Loop side by side */}
+      {/* Top row — Heap + Event Loop */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Heap data={heap} />
         <EventLoop data={el} />
@@ -85,7 +85,7 @@ export default function App() {
       {/* CPU flame graph — full width */}
       <CPU profile={cpuProfile} />
 
-      {/* Bottom row — Anomalies + GC events side by side */}
+      {/* Bottom row — Anomalies + GC events */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Anomalies items={anomalies} />
         <GCEvents items={gcEvents} />
