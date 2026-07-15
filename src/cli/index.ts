@@ -138,6 +138,19 @@ function registerCleanup(
   const shutdown = async () => {
     console.log('\n[v8-lens] Shutting down...');
 
+    // Close stdin first — prevents raw mode from blocking the exit
+    if (process.stdin.isTTY) {
+      process.stdin.setRawMode(false);
+      process.stdin.pause();
+    }
+
+    // Safety timeout — force exit in 3s if anything hangs
+    const forceExit = setTimeout(() => {
+      console.log('[v8-lens] Force exit');
+      process.exit(1);
+    }, 3000);
+    forceExit.unref(); // don't block the event loop if everything closes cleanly
+
     // Stop CPU profile if still running
     if (cpuProfiling) {
       await stopCPU().catch(() => {});
@@ -149,6 +162,7 @@ function registerCleanup(
       await dashboard.close();
     }
 
+    clearTimeout(forceExit);
     process.exit(0);
   };
 
