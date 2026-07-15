@@ -2,15 +2,20 @@
   "name": "v8-lens",
   "version": "0.0.1",
   "description": "Real-time observability for Node.js processes via the Chrome DevTools Protocol.",
+  "main": "./dist/cli/index.js",
   "type": "module",
   "bin": {
     "v8-lens": "./dist/cli/index.js"
+  },
+  "imports": {
+    "#core/*": "./src/core/*.ts",
+    "#cli/*": "./src/cli/*.ts"
   },
   "scripts": {
     "start": "tsx src/cli/index.ts",
     "build:cli": "tsc",
     "build:dashboard": "vite build --config src/dashboard/vite.config.ts",
-    "build": "pnpm run build:cli && pnpm run build:dashboard",
+    "build": "pnpm build:cli && pnpm build:dashboard",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

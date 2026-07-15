@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { resolve, dirname, join, extname } from 'node:path';
 import { createServer as createHttpServer, type Server } from 'node:http';
 import { fileURLToPath } from 'node:url';
@@ -7,9 +9,9 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { createServer, type ViteDevServer } from 'vite';
 
-import { launch } from '@cli/launcher';
-import { startObserver } from '@core/observer';
-import { DASHBOARD_PORT } from '@core/shared/constants';
+import { launch } from '#cli/launcher/index';
+import { startObserver } from '#core/observer';
+import { DASHBOARD_PORT } from '#core/shared/constants';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

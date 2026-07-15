@@ -1,4 +1,4 @@
-import { BUFFER_SIZE, HEAP_FIELDS, EVENT_LOOP_FIELDS } from './constants';
+import { BUFFER_SIZE, HEAP_FIELDS, EVENT_LOOP_FIELDS } from '#core/shared/constants';
 
 // =============================================================================
 // Shared layout

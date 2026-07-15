@@ -1,11 +1,11 @@
-import type { Anomaly } from '@core/shared/types';
-import type { AggregatedHeap, AggregatedEventLoop } from '@core/shared/types';
+import type { Anomaly, AggregatedHeap, AggregatedEventLoop } from '#core/shared/types';
+
 import {
   LEAK_WARN_THRESHOLD_MB,
   LEAK_CRIT_THRESHOLD_MB,
   EVENT_LOOP_WARN_THRESHOLD,
   EVENT_LOOP_CRIT_THRESHOLD,
-} from '@core/shared/constants';
+} from '@core/shared/constants.js';
 
 export interface AnomalyDetector {
   inspect: (heap: AggregatedHeap, el: AggregatedEventLoop) => Anomaly[];

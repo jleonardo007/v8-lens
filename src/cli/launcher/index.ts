@@ -1,6 +1,6 @@
 import inquirer from 'inquirer';
-import { scanNodeProcesses, type NodeProcess } from './scanner';
-import { activateInspect } from './signal';
+import { scanNodeProcesses, type NodeProcess } from '#cli/launcher/scanner';
+import { activateInspect } from '#cli/launcher/signal';
 
 export interface LaunchResult {
   pid: number;

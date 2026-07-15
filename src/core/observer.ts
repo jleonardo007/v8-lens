@@ -2,14 +2,12 @@ import { Worker } from 'node:worker_threads';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { connectCDP, disconnectCDP } from '@core/cdp/client';
-import { startHeapCollector } from '@core/collectors/heap';
-import { startEventLoopCollector } from '@core/collectors/event-loop';
-import { createCPUCollector } from './collectors/cpu';
-import { getHeapSAB, getEventLoopSAB } from '@core/shared/buffer';
-import type { GCEvent, Anomaly, CPUProfile } from '@core/shared/types';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { connectCDP, disconnectCDP } from '#core/cdp/client';
+import { startHeapCollector } from '#core/collectors/heap';
+import { startEventLoopCollector } from '#core/collectors/event-loop';
+import { createCPUCollector } from '#core/collectors/cpu';
+import { getHeapSAB, getEventLoopSAB } from '#core/shared/buffer';
+import type { GCEvent, Anomaly, CPUProfile } from '#core/shared/types';
 
 export interface StartObserverOptions {
   wsUrl: string;

@@ -1,5 +1,5 @@
 import { WebSocketServer, type WebSocket } from 'ws';
-import type { WsMessage } from '@core/shared/types';
+import type { WsMessage } from '#core/shared/types';
 
 export interface WsServerOptions {
   port: number;

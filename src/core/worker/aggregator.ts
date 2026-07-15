@@ -1,6 +1,6 @@
-import { readHeapHistory, readEventLoopHistory } from '@core/shared/buffer';
-import { HISTORY_WINDOW } from '@core/shared/constants';
-import type { AggregatedHeap, AggregatedEventLoop } from '@core/shared/types';
+import { readHeapHistory, readEventLoopHistory } from '#core/shared/buffer';
+import { HISTORY_WINDOW } from '#core/shared/constants';
+import type { AggregatedHeap, AggregatedEventLoop } from '#core/shared/types';
 
 export interface Aggregator {
   computeHeap: () => AggregatedHeap | null;

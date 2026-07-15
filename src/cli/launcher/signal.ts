@@ -1,4 +1,4 @@
-import { CDP_PORT, MAX_RETRIES, RETRY_MS } from '@core/shared/constants';
+import { CDP_PORT, MAX_RETRIES, RETRY_MS } from '#core/shared/constants';
 
 export interface SignalResult {
   wsUrl: string;

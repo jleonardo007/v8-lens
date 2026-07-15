@@ -1,5 +1,5 @@
 import { execSync } from 'node:child_process';
-import { EXCLUDED_SYSTEM_PATHS } from '@core/shared/constants';
+import { EXCLUDED_SYSTEM_PATHS } from '#core/shared/constants';
 
 export interface NodeProcess {
   pid: number;

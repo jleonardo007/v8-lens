@@ -1,12 +1,12 @@
-import type { Anomaly } from '@core/shared/types';
-import type { CDPConnection } from '@core/cdp/client';
+import type { Anomaly } from '#core/shared/types';
+import type { CDPConnection } from '#core/cdp/client';
+import { writeEventLoopSample } from '#core/shared/buffer';
 
-import { writeEventLoopSample } from '@core/shared/buffer';
 import {
   EVENT_LOOP_RESOLUTION_MS,
   EVENT_LOOP_WARN_THRESHOLD,
   EVENT_LOOP_CRIT_THRESHOLD,
-} from '@core/shared/constants';
+} from '#core/shared/constants';
 
 export interface EventLoopCollectorHandle {
   stop: () => void;
