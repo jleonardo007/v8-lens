@@ -105,6 +105,7 @@ function parseProfile(raw: RawCPUProfile): CPUProfile {
     const node = nodeMap.get(nodeId)!;
     const self = selfHits.get(nodeId) ?? 0;
     const total = totalHits.get(nodeId) ?? 0;
+    const totalPct = (total / totalSamples) * 100;
 
     return {
       name: node.callFrame.functionName || '(anonymous)',
@@ -113,9 +114,10 @@ function parseProfile(raw: RawCPUProfile): CPUProfile {
       selfMs: self * tickMs,
       totalMs: total * tickMs,
       selfPct: (self / totalSamples) * 100,
-      totalPct: (total / totalSamples) * 100,
+      totalPct,
       deoptReasons: node.deoptReasons ?? [],
-      children: node.children?.map(buildNode) ?? [],
+      // filter out children that are too small to display (less than 5% of total)
+      children: (node.children ?? []).map(buildNode).filter((child) => child.totalPct >= 5),
     };
   }
 
