@@ -1,5 +1,4 @@
 import { Worker } from 'node:worker_threads';
-import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { connectCDP, disconnectCDP } from '#core/cdp/client';
@@ -58,24 +57,23 @@ export async function startObserver({ wsUrl }: StartObserverOptions) {
 
 function createWorker() {
   // In dev we run from src/ via tsx, in production from dist/ as
-  // compiled JS — same environment-detection pattern used in cli/index.ts.
-  const isDev = __dirname.includes(resolve('src'));
-  const workerPath = isDev
-    ? resolve(__dirname, 'worker/index.ts')
-    : resolve(__dirname, 'worker/index.js');
+  // compiled JS — detect the environment from the current module
+  // instead of relying on directory comparisons.
+  const isDev = fileURLToPath(import.meta.url).endsWith('.ts');
+
+  const workerUrl = new URL(isDev ? './worker/index.ts' : './worker/index.js', import.meta.url);
 
   // buffer.ts owns the SAB — it creates it on module load and keeps it
   // as internal state. getHeapSab/getElSab expose it so the Observer can
   // hand it to the Worker via workerData. Once the Worker calls
   // attachHeapSab/attachElSab, both threads point at the same physical
   // memory — the Observer writes, the Worker reads, zero copies.
-  return new Worker(workerPath, {
-    execArgv: isDev ? ['--import', 'tsx'] : [],
-    workerData: { heapSAB: getHeapSAB(), eventLoopSAB: getEventLoopSAB() },
-    // TODO: confirm tsx-compatible worker loading in dev — worker_threads
-    // doesn't transpile TS on its own; may need execArgv with a loader,
-    // or simply require dev to run `pnpm build:cli` first and always
-    // point workers at dist/. Revisit once this is tested end-to-end.
+  return new Worker(workerUrl, {
+    execArgv: isDev ? ['--import=tsx'] : [],
+    workerData: {
+      heapSAB: getHeapSAB(),
+      eventLoopSAB: getEventLoopSAB(),
+    },
   });
 }
 
