@@ -7,19 +7,15 @@
   "bin": {
     "v8-lens": "./dist/cli/index.js"
   },
-  "imports": {
-    "#core/*": "./src/core/*.ts",
-    "#cli/*": "./src/cli/*.ts"
-  },
-  "scripts": {
-    "start": "tsx src/cli/index.ts",
-    "build:cli": "tsc",
-    "build:dashboard": "vite build --config src/dashboard/vite.config.ts",
-    "build": "pnpm build:cli && pnpm build:dashboard",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "prepare": "husky"
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/dashboard/**",
+    "README.md",
+    "package.json"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
   },
   "keywords": [
     "v8",
