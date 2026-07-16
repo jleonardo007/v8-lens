@@ -34,6 +34,14 @@
     "performance",
     "cli"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jleonardo007/v8-lens.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jleonardo007/v8-lens/issues"
+  },
+  "homepage": "https://github.com/jleonardo007/v8-lens#readme",
   "author": "Leonardo Bravo (https://github.com/jleonardo007)",
   "license": "MIT",
   "imports": {
