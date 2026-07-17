@@ -1,6 +1,6 @@
 {
   "name": "v8-lens",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Real-time observability for Node.js processes via the Chrome DevTools Protocol.",
   "main": "./dist/cli/index.js",
   "type": "module",
