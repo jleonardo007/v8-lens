@@ -54,7 +54,7 @@
     "lint:check": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "validate": "npm run lint:check && npm run format:check",
+    "validate": "pnpm lint:check && pnpm run format:check",
     "prepare": "husky"
   },
   "dependencies": {
