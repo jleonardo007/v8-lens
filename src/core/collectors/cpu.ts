@@ -1,6 +1,6 @@
-import { CPU_SAMPLING_INTERVAL_US } from '#core/shared/constants';
-import type { CDPConnection } from '#core/cdp/client';
-import type { CPUProfile, FlameNode, DeoptWarning } from '#core/shared/types';
+import { CPU_SAMPLING_INTERVAL_US } from '@core/shared/constants.js';
+import type { CDPConnection } from '@core/cdp/client.js';
+import type { CPUProfile, FlameNode, DeoptWarning } from '@core/shared/types.js';
 
 // Internal CDP types — not exported, implementation detail of this collector
 interface CallFrame {

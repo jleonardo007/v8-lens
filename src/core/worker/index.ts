@@ -1,12 +1,12 @@
 import { parentPort, workerData } from 'node:worker_threads';
 
-import { attachHeapSAB, attachEventLoopSAB } from '#core/shared/buffer';
-import { AGGREGATE_INTERVAL_MS, WS_PORT } from '#core/shared/constants';
-import type { WorkerInboundMessage } from '#core/shared/types';
+import { attachHeapSAB, attachEventLoopSAB } from '@core/shared/buffer.js';
+import { AGGREGATE_INTERVAL_MS, WS_PORT } from '@core/shared/constants.js';
+import type { WorkerInboundMessage } from '@core/shared/types.js';
 
-import { startWsServer } from '#core/worker/ws-server';
-import { createAggregator } from '#core/worker/aggregator';
-import { createAnomalyDetector } from '#core/worker/anomaly';
+import { startWsServer } from '@core/worker/ws-server.js';
+import { createAggregator } from '@core/worker/aggregator.js';
+import { createAnomalyDetector } from '@core/worker/anomaly.js';
 
 // Both SABs arrive via workerData — same memory as the main thread,
 // no copy, no serialization.

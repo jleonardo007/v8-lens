@@ -1,4 +1,4 @@
-import type { Anomaly, AggregatedHeap, AggregatedEventLoop } from '#core/shared/types';
+import type { Anomaly, AggregatedHeap, AggregatedEventLoop } from '@core/shared/types.js';
 
 import {
   LEAK_WARN_THRESHOLD_MB,

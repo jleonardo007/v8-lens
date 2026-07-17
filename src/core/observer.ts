@@ -1,12 +1,12 @@
 import { Worker } from 'node:worker_threads';
 import { fileURLToPath } from 'node:url';
 
-import { connectCDP, disconnectCDP } from '#core/cdp/client';
-import { startHeapCollector } from '#core/collectors/heap';
-import { startEventLoopCollector } from '#core/collectors/event-loop';
-import { createCPUCollector } from '#core/collectors/cpu';
-import { getHeapSAB, getEventLoopSAB } from '#core/shared/buffer';
-import type { GCEvent, Anomaly, CPUProfile } from '#core/shared/types';
+import { connectCDP, disconnectCDP } from '@core/cdp/client.js';
+import { startHeapCollector } from '@core/collectors/heap.js';
+import { startEventLoopCollector } from '@core/collectors/event-loop.js';
+import { createCPUCollector } from '@core/collectors/cpu.js';
+import { getHeapSAB, getEventLoopSAB } from '@core/shared/buffer.js';
+import type { GCEvent, Anomaly, CPUProfile } from '@core/shared/types.js';
 
 export interface StartObserverOptions {
   wsUrl: string;

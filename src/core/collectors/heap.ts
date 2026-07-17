@@ -1,6 +1,6 @@
-import type { CDPConnection } from '#core/cdp/client';
-import type { HeapSnapshot, GCEvent, Anomaly } from '#core/shared/types';
-import { writeHeapSample, readHeapHistory } from '#core/shared/buffer';
+import { writeHeapSample, readHeapHistory } from '@core/shared/buffer.js';
+import type { CDPConnection } from '@core/cdp/client.js';
+import type { HeapSnapshot, GCEvent, Anomaly } from '@core/shared/types.js';
 
 import {
   POLL_INTERVAL_MS,
@@ -11,7 +11,7 @@ import {
   GC_PRESSURE_CRIT_COUNT,
   GC_PRESSURE_WINDOW_MS,
   ANOMALY_HISTORY_WINDOW,
-} from '#core/shared/constants';
+} from '@core/shared/constants.js';
 
 interface RawHeapStats {
   usedSize: number;

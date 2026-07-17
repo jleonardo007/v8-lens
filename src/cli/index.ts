@@ -9,9 +9,9 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { createServer, type ViteDevServer } from 'vite';
 
-import { launch } from '#cli/launcher/index';
-import { startObserver } from '#core/observer';
-import { DASHBOARD_PORT } from '#core/shared/constants';
+import { launch } from '@cli/launcher/index.js';
+import { startObserver } from '@core/observer.js';
+import { DASHBOARD_PORT } from '@core/shared/constants.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
