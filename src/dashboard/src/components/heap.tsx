@@ -54,7 +54,10 @@ export function Heap({ data }: Props) {
         return;
       }
 
-      const maxMB = Math.max(...history.map((h) => h.latestTotalMB), 64);
+      const maxMB = Math.max(
+        ...history.map((h) => h.latestTotalMB),
+        history[history.length - 1].latestTotalMB
+      );
       const bw = W / HISTORY_SIZE;
 
       // Total heap area (background)
